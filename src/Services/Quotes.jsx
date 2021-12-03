@@ -1,4 +1,4 @@
-import { data, characterArr } from '../Backup/BackupData.js'
+import { data } from '../Backup/BackupData.js'
 
 export const fetchQuotes = async () => {
     try {const fetchedQuote = await fetch('https://www.officeapi.dev/api/quotes/')
@@ -11,14 +11,14 @@ export const fetchQuotes = async () => {
         return tenQ;
     }
 }
-export const filteredQuotes = async (character) => {
+export const filteredQuotes = async (characterString) => {
     try {const fetchedQuote = await fetch('https://www.officeapi.dev/api/quotes/')
     const quotesObj = await fetchedQuote.json();
     const quotes = await quotesObj.data;
-    const tenQ = await charQuotes(quotes, character);
+    const tenQ = await charQuotes(quotes, characterString);
     return tenQ }
     catch {
-        const tenQ = await charQuotes(data, character)
+        const tenQ = await charQuotes(data, characterString)
         return tenQ;
     }
 }
@@ -28,11 +28,6 @@ export const tenQuotes =  (arr) => {
   return selected;
 }
 export const charQuotes = (arr, character) => {
-    let newArr = [];
-    for(let item of arr){
-      if(item.character.firstname === character) {
-            item.push(newArr)
-        }  
-    }
-    return newArr;
+    const filtered = arr.filter(item => item.character.firstname === character )
+    return filtered;
 }

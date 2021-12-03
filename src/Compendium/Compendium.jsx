@@ -1,6 +1,6 @@
 import {  useState, useEffect } from "react";
 import QuoteList from "../Components/QuoteList/QuoteList";
-import { fetchQuotes, filteredQuotes, getCharNames } from "../Services/Quotes";
+import { fetchQuotes, filteredQuotes } from "../Services/Quotes";
 import './Compendium.css'
 import Header from "../Components/Header";
 import Controls from "../Components/Controls/Controls";
@@ -8,8 +8,7 @@ import Controls from "../Components/Controls/Controls";
 export default function Compendium() {
   const [loading, setLoading] = useState(true);
   const [quotes, setQuotes] = useState([]);
-  const [filtered, setFiltered] = useState([]);
-  const [characterName, setCharacterName] = useState('all')
+  const [characterName, setCharacterName] = useState('')
     
     useEffect(() => { 
         async function getQuotes() {
@@ -22,10 +21,18 @@ export default function Compendium() {
     
 
     useEffect(() => {
+        if (!characterName) return;
         async function getFiltered() {
-            const quoteList = await filteredQuotes(characterName);
-            setFiltered(quoteList);
-            setLoading(false);
+            setLoading(true)
+            if(characterName !== 'all') {    
+                const quoteList = await filteredQuotes(characterName);
+                setQuotes(quoteList);
+                
+            } else {
+                const quoteList = await fetchQuotes();
+                setQuotes(quoteList);
+              } setLoading(false);
+              
         };
         getFiltered();
 
@@ -44,7 +51,7 @@ export default function Compendium() {
                 : (
                     <main className='main-cnt'> 
                     <div></div>
-                    <QuoteList filtered={filtered} quotes={quotes}/>
+                    <QuoteList quotes={quotes}/>
                     <div></div>
                     </main>
                   )}
