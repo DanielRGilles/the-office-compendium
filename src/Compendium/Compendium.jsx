@@ -1,12 +1,13 @@
 import {  useState, useEffect } from "react";
-import QuoteList from "../Components/QuoteList";
-import { fetchQuotes } from "../Services/Quotes";
+import QuoteList from "../Components/QuoteList/QuoteList";
+import { fetchQuotes, filteredQuotes } from "../Services/Quotes";
 import './Compendium.css'
 import Header from "../Components/Header";
 
 export default function Compendium() {
-  const [loading, setLoading] = useState(true)
-  const [quotes, setQuotes] = useState([])
+  const [loading, setLoading] = useState(true);
+  const [quotes, setQuotes] = useState([]);
+  const [filtered, setFiltered] = useState('All');
 
     useEffect(() => { 
         async function getQuotes() {
@@ -16,6 +17,17 @@ export default function Compendium() {
         };
     getQuotes();
     }, [])
+
+    useEffect(() => {
+        async function getFiltered() {
+            const quoteList = await filteredQuotes(filtered);
+            setFiltered(quoteList);
+            setLoading(false);
+        };
+        getFiltered();
+
+        }, [filtered])
+    
     
     return (
     <div className='main-body'>

@@ -1,5 +1,5 @@
 import React from 'react';
-import './quotes.css';
+import './quotes.css'
 
 export default function QuoteItem({quote}) {
     return (
