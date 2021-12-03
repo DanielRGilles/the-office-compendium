@@ -1,11 +1,11 @@
 import React from 'react'
-
+import QuoteItem from './QuoteItem'
 export default function QuoteList({quotes}) {
     return (
-        <div>
+        <ul>
             {quotes.map((quote) => { 
-                return (<p>{quote.firstname} {quote.lastname}
-                        says: {quote.quote}</p>)} )}
-        </div>
+                return (<QuoteItem quote={quote}/>)} )}
+        </ul>
     )
 }
+

@@ -1,8 +1,8 @@
 export const mungeQuotes = (arr) => {
-    
-    return {
-        firstname : arr.character.firstname,
-        lastname : arr.character.lastname,
-        quote : arr.content
-    }
+    arr.map((item) =>  { let quote = { id : item._id,
+        firstname : item.character.firstname,
+        lastname : item.character.lastname,
+        quote : item.content}
+        return quote}
+        )
 }

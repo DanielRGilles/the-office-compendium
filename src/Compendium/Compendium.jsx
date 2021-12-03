@@ -1,6 +1,7 @@
 import {  useState, useEffect } from "react";
 import QuoteList from "../Components/QuoteList";
-import { tenQuotes } from "../Services/Quotes";
+import { fetchQuotes } from "../Services/Quotes";
+import './Compendium.css'
 
 export default function Compendium() {
   const [loading, setLoading] = useState(true)
@@ -8,7 +9,7 @@ export default function Compendium() {
 
     useEffect(() => { 
         async function getQuotes() {
-            const quoteList = await tenQuotes();
+            const quoteList = await fetchQuotes();
             setQuotes(quoteList);
             setLoading(false);
         };
@@ -16,7 +17,7 @@ export default function Compendium() {
     }, [])
     
     return (
-    <div>
+    <div className='main-body'>
       {loading ? (
         <h1>Loading...</h1>
       ) : (

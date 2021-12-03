@@ -1,0 +1,9 @@
+.quote-item > img {
+    width: 400px;
+}
+.quote-item {
+    border: 1px solid black;
+}
+ul {
+    margin: 0;
+}
