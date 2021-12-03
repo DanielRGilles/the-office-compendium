@@ -399,7 +399,7 @@ export const data = [{
     },
     "__v": 0
 }];
-export const characters = {
+export const characterArr = {
     "data": [{
         "_id": "5e93b4a43af44260882e33b0",
         "firstname": "Michael",

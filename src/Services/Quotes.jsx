@@ -1,4 +1,5 @@
-import { data } from '../Backup/BackupData.js'
+import { data, characterArr } from '../Backup/BackupData.js'
+
 export const fetchQuotes = async () => {
     try {const fetchedQuote = await fetch('https://www.officeapi.dev/api/quotes/')
     const quotesObj = await fetchedQuote.json();
@@ -33,6 +34,5 @@ export const charQuotes = (arr, character) => {
             item.push(newArr)
         }  
     }
-   
     return newArr;
 }

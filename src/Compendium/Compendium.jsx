@@ -1,14 +1,16 @@
 import {  useState, useEffect } from "react";
 import QuoteList from "../Components/QuoteList/QuoteList";
-import { fetchQuotes, filteredQuotes } from "../Services/Quotes";
+import { fetchQuotes, filteredQuotes, getCharNames } from "../Services/Quotes";
 import './Compendium.css'
 import Header from "../Components/Header";
+import Controls from "../Components/Controls/Controls";
 
 export default function Compendium() {
   const [loading, setLoading] = useState(true);
   const [quotes, setQuotes] = useState([]);
-  const [filtered, setFiltered] = useState('All');
-
+  const [filtered, setFiltered] = useState([]);
+  const [characterName, setCharacterName] = useState('all')
+    
     useEffect(() => { 
         async function getQuotes() {
             const quoteList = await fetchQuotes();
@@ -17,30 +19,35 @@ export default function Compendium() {
         };
     getQuotes();
     }, [])
+    
 
     useEffect(() => {
         async function getFiltered() {
-            const quoteList = await filteredQuotes(filtered);
+            const quoteList = await filteredQuotes(characterName);
             setFiltered(quoteList);
             setLoading(false);
         };
         getFiltered();
 
-        }, [filtered])
+        }, [characterName])
     
     
     return (
     <div className='main-body'>
         <Header/>
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-         <main className='main-cnt'> 
-        <div></div>
-        <QuoteList quotes={quotes}/>
-        <div></div>
-        </main>
-      )}
+        <Controls 
+        characterName={characterName} 
+        setCharacterName={setCharacterName}
+       />
+            {loading 
+                ? (<h1 className='load-spin'>Loading...</h1>)
+                : (
+                    <main className='main-cnt'> 
+                    <div></div>
+                    <QuoteList filtered={filtered} quotes={quotes}/>
+                    <div></div>
+                    </main>
+                  )}
             
     </div>
   )

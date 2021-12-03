@@ -1,11 +1,15 @@
 import React from 'react'
 import QuoteItem from '../QuoteItem/QuoteItem'
 
-export default function QuoteList({quotes}) {
+export default function QuoteList({quotes, filtered}) {
     return (
         <ul>
-            {quotes.map((quote) => { 
-                return (<QuoteItem quote={quote}/>)} )}
+            {filtered.length === 0 
+                ? quotes.map((quote) => { 
+                    return (<QuoteItem quote={quote}/>)} )
+                : filtered.map((quote) => { 
+                    return (<QuoteItem quote={quote}/>)} )
+            }
         </ul>
     )
 }
