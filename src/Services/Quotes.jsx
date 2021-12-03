@@ -31,3 +31,22 @@ export const charQuotes = (arr, character) => {
     const filtered = arr.filter(item => item.character.firstname === character )
     return filtered;
 }
+export const fetchSearchQuery = async (query) => {
+    try {const fetchedQuote = await fetch('https://www.officeapi.dev/api/quotes/')
+    const quotesObj = await fetchedQuote.json();
+    const quotes = await quotesObj.data;
+    const tenQ = await searchQuotes(quotes, query);
+    return tenQ }
+    catch {
+        const tenQ = await searchQuotes(data, query)
+        return tenQ;
+    }
+}
+export const searchQuotes = async (arr, query) => {
+    
+    const nameSearched = arr.filter(item => item.character.firstname === query )
+    const quoteSearched = arr.filter( item => item.content.includes(query))
+    
+    return nameSearched.concat(quoteSearched);
+}
+// || item.content.includes(query)

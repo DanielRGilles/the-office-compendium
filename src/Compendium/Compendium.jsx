@@ -1,6 +1,6 @@
 import {  useState, useEffect } from "react";
 import QuoteList from "../Components/QuoteList/QuoteList";
-import { fetchQuotes, filteredQuotes } from "../Services/Quotes";
+import { fetchQuotes, filteredQuotes, fetchSearchQuery } from "../Services/Quotes";
 import './Compendium.css'
 import Header from "../Components/Header";
 import Controls from "../Components/Controls/Controls";
@@ -9,7 +9,9 @@ export default function Compendium() {
   const [loading, setLoading] = useState(true);
   const [quotes, setQuotes] = useState([]);
   const [characterName, setCharacterName] = useState('')
+  const [query, setQuery ] = useState('')
     
+  // on page load this hook will query the api for 40 quotes, then randomly grab 10 and pass those down to render
     useEffect(() => { 
         async function getQuotes() {
             const quoteList = await fetchQuotes();
@@ -19,7 +21,7 @@ export default function Compendium() {
     getQuotes();
     }, [])
     
-
+// this hook will listen for the character value to change and if so will fetch the max 40 quotes and render those that match the character name
     useEffect(() => {
         if (!characterName) return;
         async function getFiltered() {
@@ -32,17 +34,30 @@ export default function Compendium() {
                 const quoteList = await fetchQuotes();
                 setQuotes(quoteList);
               } setLoading(false);
-              
+
         };
         getFiltered();
 
         }, [characterName])
     
+// this form will pass down the query string so that a user can search for all quotes by a character name OR search the max 40 quotes for specific words/letters and return those
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    const searched = await fetchSearchQuery(query)
+      setQuotes(searched);
+      setLoading(false);
+      setQuery('');
+      setCharacterName('');
+  }
     
     return (
     <div className='main-body'>
         <Header/>
         <Controls 
+        handleSubmit={handleSubmit}
+        handleWordChange={setQuery}
+        query={query}
         characterName={characterName} 
         setCharacterName={setCharacterName}
        />

@@ -5,7 +5,7 @@ export default function QuoteList({quotes}) {
     return (
         <ul>
             { quotes.map((quote) => { 
-                    return (<QuoteItem quote={quote}/>)} )    
+                    return (<QuoteItem key={quote._id} quote={quote}/>)} )    
             }
         </ul>
     )
