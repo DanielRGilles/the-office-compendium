@@ -1,4 +1,4 @@
-
+import { data } from '../Backup/BackupData.js'
 export const fetchQuotes = async () => {
     try {const fetchedQuote = await fetch('https://www.officeapi.dev/api/quotes/')
     const quotesObj = await fetchedQuote.json();
@@ -6,10 +6,8 @@ export const fetchQuotes = async () => {
     const tenQ = await tenQuotes(quotes);
     return tenQ }
     catch {
-        return [
-            { content: 'This happened because of a daily limit on the API',
-            _id: 1,
-            character: { firstname: 'default', lastname: ' image '}}]
+        const tenQ = await tenQuotes(data)
+        return tenQ;
     }
 }
 export const tenQuotes =  (arr) => {

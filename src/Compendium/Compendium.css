@@ -1,6 +1,14 @@
 .main-body {
     margin: 0;
-    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100;
     background-color: cornflowerblue;
-    height: 100vh;
+    height: 100;
+}
+.main-cnt {
+    display: grid;
+    grid-template-columns: 15% 1fr 15%;
 }
