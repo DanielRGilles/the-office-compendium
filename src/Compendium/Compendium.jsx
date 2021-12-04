@@ -1,6 +1,6 @@
 import {  useState, useEffect } from "react";
 import QuoteList from "../Components/QuoteList/QuoteList";
-import { fetchQuotes, filteredQuotes, fetchSearchQuery } from "../Services/Quotes";
+import { fetchQuotes, filteredQuotes, fetchSearchQuery, fetchRandom } from "../Services/Quotes";
 import './Compendium.css'
 import Header from "../Components/Header";
 import Controls from "../Components/Controls/Controls";
@@ -8,8 +8,9 @@ import Controls from "../Components/Controls/Controls";
 export default function Compendium() {
   const [loading, setLoading] = useState(true);
   const [quotes, setQuotes] = useState([]);
-  const [characterName, setCharacterName] = useState('')
-  const [query, setQuery ] = useState('')
+  const [characterName, setCharacterName] = useState('');
+  const [query, setQuery ] = useState('');
+  const [numOfRandom, setNum ] = useState('')
     
   // on page load this hook will query the api for 40 quotes, then randomly grab 10 and pass those down to render
     useEffect(() => { 
@@ -50,7 +51,16 @@ export default function Compendium() {
       setQuery('');
       setCharacterName('');
   }
-    
+  // this event triggered on button click that will individually grab random quotes from the api
+    const handleRandomSubmit =  async (event) => {
+        event.preventDefault();
+        setLoading(true); 
+        const random = await fetchRandom(numOfRandom)
+        setQuotes(random);
+        setLoading(false);
+         }
+
+
     return (
     <div className='main-body'>
         <Header/>
@@ -60,6 +70,9 @@ export default function Compendium() {
         query={query}
         characterName={characterName} 
         setCharacterName={setCharacterName}
+        numOfRandom={numOfRandom}
+        setRandomQuotes={handleRandomSubmit}
+        setNum={setNum}
        />
             {loading 
                 ? (<h1 className='load-spin'>Loading...</h1>)

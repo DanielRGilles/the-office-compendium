@@ -7,6 +7,7 @@ export const fetchQuotes = async () => {
     const tenQ = await tenQuotes(quotes);
     return tenQ }
     catch {
+        console.log('api fetch failed backup data used')
         const tenQ = await tenQuotes(data)
         return tenQ;
     }
@@ -18,6 +19,7 @@ export const filteredQuotes = async (characterString) => {
     const tenQ = await charQuotes(quotes, characterString);
     return tenQ }
     catch {
+        console.log('api fetch failed backup data used')
         const tenQ = await charQuotes(data, characterString)
         return tenQ;
     }
@@ -38,6 +40,7 @@ export const fetchSearchQuery = async (query) => {
     const tenQ = await searchQuotes(quotes, query);
     return tenQ }
     catch {
+        console.log('api fetch failed backup data used')
         const tenQ = await searchQuotes(data, query)
         return tenQ;
     }
@@ -49,4 +52,18 @@ export const searchQuotes = async (arr, query) => {
     
     return nameSearched.concat(quoteSearched);
 }
-// || item.content.includes(query)
+
+export const fetchRandom = async (num) => {
+    try { let randomArr = [];
+        let i = 0;
+    while ( i <= num) {
+        const rando = await fetch('https://officeapi.dev/api/quotes/random')
+        const mungy = await rando.json();
+        const munged = await mungy.data;
+        randomArr.push(munged);
+        i++
+    }
+    return randomArr;
+        }
+    catch { console.log('The Api hit its daily limit so I can/t deliver the goods')}
+}

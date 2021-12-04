@@ -2,6 +2,7 @@
 html {
   margin: 0;
   box-sizing: border-box;
+  background-color: cornflowerblue;
 }
 .header-box {
   font-size: 4rem;
