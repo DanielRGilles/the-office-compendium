@@ -61,7 +61,7 @@ export const fetchRandom = async (num) => {
         const mungy = await rando.json();
         const munged = await mungy.data;
         randomArr.push(munged);
-        i++
+        i++;
     }
     return randomArr;
         }

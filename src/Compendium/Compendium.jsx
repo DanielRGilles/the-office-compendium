@@ -10,7 +10,7 @@ export default function Compendium() {
   const [quotes, setQuotes] = useState([]);
   const [characterName, setCharacterName] = useState('');
   const [query, setQuery ] = useState('');
-  const [numOfRandom, setNum ] = useState('')
+  const [numOfRandom, setNum ] = useState();
     
   // on page load this hook will query the api for 40 quotes, then randomly grab 10 and pass those down to render
     useEffect(() => { 
