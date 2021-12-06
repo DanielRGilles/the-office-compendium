@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import QuoteItem from './QuoteItem'
 
-it('Should fetch then render a list of office quotes', async () => {
+it('Should render a quote', async () => {
   const quote = {
     "_id": "5e966a526a66e65486e244b5",
     "content": "Shut up about the sun. SHUT UP ABOUT THE SUN!",

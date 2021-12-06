@@ -1,5 +1,5 @@
-import { screen, render, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render } from '@testing-library/react'
+
 import Compendium from './Compendium'
 
 it('Should fetch then render a list of office quotes', async () => {
