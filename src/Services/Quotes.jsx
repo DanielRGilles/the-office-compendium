@@ -53,17 +53,24 @@ export const searchQuotes = async (arr, query) => {
     return nameSearched.concat(quoteSearched);
 }
 
-export const fetchRandom = async (num) => {
-    try { let randomArr = [];
-        let i = 0;
-    while ( i <= num) {
+export const fetchRandom = async () => {
+    try { 
         const rando = await fetch('https://officeapi.dev/api/quotes/random')
         const mungy = await rando.json();
         const munged = await mungy.data;
-        randomArr.push(munged);
-        i++;
+       return munged
     }
-    return randomArr;
-        }
-    catch { console.log('The Api hit its daily limit so I can/t deliver the goods')}
+    catch { 
+        console.log('The Api hit its daily limit so I can/t deliver the goods')}
+        const firstRandom = tenQuotes(data);
+        return firstRandom[0];
+}
+export const randomQuotes = async (num) => {
+    let newArr = [];
+    for(let i = 0; i < num; i++){
+        const quote = await fetchRandom();
+        newArr.push(quote)
+    }
+    console.log(newArr);
+    return newArr;
 }

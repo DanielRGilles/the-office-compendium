@@ -1,6 +1,6 @@
 import {  useState, useEffect } from "react";
 import QuoteList from "../Components/QuoteList/QuoteList";
-import { fetchQuotes, filteredQuotes, fetchSearchQuery, fetchRandom } from "../Services/Quotes";
+import { fetchQuotes, filteredQuotes, fetchSearchQuery, randomQuotes } from "../Services/Quotes";
 import './Compendium.css'
 import Header from "../Components/Header";
 import Controls from "../Components/Controls/Controls";
@@ -55,7 +55,7 @@ export default function Compendium() {
     const handleRandomSubmit =  async (event) => {
         event.preventDefault();
         setLoading(true); 
-        const random = await fetchRandom(numOfRandom)
+        const random = await randomQuotes(numOfRandom)
         setQuotes(random);
         setLoading(false);
          }
