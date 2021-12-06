@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# the-office-compendium
+an app that retrieves quotes by character for the hit show The Office
+
+# Api
+https://www.officeapi.dev/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

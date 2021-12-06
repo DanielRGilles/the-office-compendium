@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render a quote 1`] = `
+<div>
+  <li
+    class="quote-item"
+  >
+    <img
+      alt="Gabe"
+      src="Assets/Gabe.jpg"
+    />
+    <div
+      class="quote-text"
+    >
+      Gabe
+       
+      Lewis
+      : 
+      Shut up about the sun. SHUT UP ABOUT THE SUN!
+    </div>
+  </li>
+</div>
+`;
